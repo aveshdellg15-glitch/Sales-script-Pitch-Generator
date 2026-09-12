@@ -1,4 +1,5 @@
+
 User-agent: *
 Allow: /
 
-Sitemap: https://sales-script-pitch-generator.vercel.app/sitemap.xml
+Sitemap: https://salescript.co.za/sitemap.xml
