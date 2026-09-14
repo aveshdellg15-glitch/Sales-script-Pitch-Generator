@@ -1,924 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Scriptly — AI Sales Script Generator</title>
-
-  <meta name="description" content="Turn your product into a sales script that converts. Generate professional phone and DM sales scripts in seconds.">
-
-  <!-- Google Search Console Verification -->
-  <meta name="google-site-verification" content="D48LHiU84qCEZr1Xswz-TidGFi0VyjCk_Rd7ViBgf04" />
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LTR7RPV8FT"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-
-    gtag('js', new Date());
-
-    gtag('config', 'G-LTR7RPV8FT');
-  </script>
-
+  <meta name="theme-color" content="#245de8">
+  <title>Scriptly — Free Sales Script &amp; Pitch Generator</title>
+  <meta name="description" content="Turn your product, service or idea into a clear sales conversation. Create tailored phone, DM, email and in-person pitches with follow-ups and objection responses. Free, no sign-up.">
+  <meta name="google-site-verification" content="D48LHiU84qCEZr1Xswz-TidGFi0VyjCk_Rd7ViBgf04">
+  <meta property="og:title" content="Scriptly — Find the words. Start the conversation.">
+  <meta property="og:description" content="A free pitch builder for products, services and ideas. Clearer questions. Sharper pitches. A more confident next step.">
+  <meta property="og:type" content="website">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     :root {
-      --bg: #08090d;
-      --card: #11131a;
-      --card2: #161923;
-      --border: rgba(255,255,255,0.09);
-      --text: #f7f7f8;
-      --muted: #9297a7;
-      --accent: #7c5cff;
-      --accent2: #9b85ff;
-      --green: #35d49a;
+      color-scheme: light;
+      --bg: #f6f9ff; --card: #fff; --soft: #f2f6fe; --border: #dee6f2;
+      --text: #162744; --muted: #60708b; --accent: #245de8; --accent-dark: #1747bd;
+      --blue-light: #ebf2ff; --green: #18744d; --shadow: 0 12px 36px rgba(34,65,117,.045);
     }
-
-    body {
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at 50% -10%, rgba(124,92,255,.18), transparent 35%),
-        var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
-
-    /* NAVBAR */
-
-    nav {
-      width: 100%;
-      max-width: 1180px;
-      margin: auto;
-      padding: 22px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 23px;
-      font-weight: 800;
-      letter-spacing: -0.7px;
-    }
-
-    .logo span {
-      color: var(--accent2);
-    }
-
-    .nav-button {
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      color: white;
-      padding: 10px 16px;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-    /* HERO */
-
-    .hero {
-      max-width: 850px;
-      margin: 65px auto 45px;
-      padding: 0 24px;
-      text-align: center;
-    }
-
-    .badge {
-      display: inline-flex;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: rgba(124,92,255,.12);
-      border: 1px solid rgba(124,92,255,.25);
-      color: #b7a8ff;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 22px;
-    }
-
-    h1 {
-      font-size: clamp(42px, 7vw, 72px);
-      line-height: .98;
-      letter-spacing: -3px;
-      margin-bottom: 22px;
-    }
-
-    h1 span {
-      background: linear-gradient(90deg, #ffffff, #9b85ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      max-width: 650px;
-      margin: auto;
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.6;
-    }
-
-    /* APP */
-
-    .app {
-      max-width: 1180px;
-      margin: 0 auto 80px;
-      padding: 0 24px;
-      display: grid;
-      grid-template-columns: 420px 1fr;
-      gap: 22px;
-    }
-
-    .panel {
-      background: rgba(17,19,26,.86);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 25px;
-      backdrop-filter: blur(15px);
-    }
-
-    .panel-title {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 5px;
-    }
-
-    .panel-subtitle {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 22px;
-    }
-
-    label {
-      display: block;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #d9dbe2;
-    }
-
-    input,
-    textarea,
-    select {
-      width: 100%;
-      border: 1px solid var(--border);
-      background: #0c0e14;
-      color: white;
-      padding: 13px 14px;
-      border-radius: 11px;
-      outline: none;
-      font-size: 14px;
-      margin-bottom: 17px;
-      transition: .2s;
-    }
-
-    textarea {
-      min-height: 85px;
-      resize: vertical;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: rgba(124,92,255,.7);
-      box-shadow: 0 0 0 3px rgba(124,92,255,.08);
-    }
-
-    .row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    /* TYPE BUTTONS */
-
-    .type-buttons {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .type-btn {
-      padding: 13px;
-      border: 1px solid var(--border);
-      background: #0c0e14;
-      color: #aeb2c0;
-      border-radius: 11px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: .2s;
-    }
-
-    .type-btn.active {
-      background: rgba(124,92,255,.14);
-      border-color: var(--accent);
-      color: white;
-    }
-
-    /* GENERATE BUTTON */
-
-    .generate {
-      width: 100%;
-      border: 0;
-      padding: 15px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #7c5cff, #6240dc);
-      color: white;
-      font-weight: 700;
-      font-size: 15px;
-      cursor: pointer;
-      box-shadow: 0 10px 30px rgba(124,92,255,.18);
-      transition: .2s;
-    }
-
-    .generate:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 35px rgba(124,92,255,.3);
-    }
-
-    /* OUTPUT */
-
-    .output-panel {
-      min-height: 600px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .output-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 18px;
-    }
-
-    .output-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .small-btn {
-      border: 1px solid var(--border);
-      background: #0c0e14;
-      color: #d9dbe2;
-      padding: 9px 12px;
-      border-radius: 9px;
-      cursor: pointer;
-      font-size: 12px;
-    }
-
-    .small-btn:hover {
-      border-color: rgba(255,255,255,.2);
-    }
-
-    .script-box {
-      flex: 1;
-      background: #0b0d12;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 24px;
-      white-space: pre-wrap;
-      line-height: 1.75;
-      font-size: 15px;
-      color: #dfe1e8;
-      overflow-y: auto;
-      min-height: 480px;
-    }
-
-    .placeholder {
-      height: 100%;
-      min-height: 430px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #656a79;
-    }
-
-    .placeholder-icon {
-      font-size: 42px;
-      margin-bottom: 15px;
-    }
-
-    .stats {
-      display: flex;
-      gap: 20px;
-      margin-top: 13px;
-      color: #777c8b;
-      font-size: 12px;
-    }
-
-    /* FOOTER */
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 25px;
-      text-align: center;
-      color: #626776;
-      font-size: 12px;
-    }
-
-    /* TOAST */
-
-    .toast {
-      position: fixed;
-      bottom: 25px;
-      left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: #f5f5f5;
-      color: #111;
-      padding: 12px 18px;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 600;
-      opacity: 0;
-      transition: .3s;
-      z-index: 100;
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    @media(max-width: 850px) {
-      .app {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        margin-top: 45px;
-      }
-
-      h1 {
-        letter-spacing: -2px;
-      }
-    }
-
-    @media(max-width: 500px) {
-      nav {
-        padding: 18px;
-      }
-
-      .app {
-        padding: 0 14px;
-      }
-
-      .panel {
-        padding: 19px;
-      }
-
-      .row {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-
-      .hero {
-        padding: 0 18px;
-      }
-
-      .hero p {
-        font-size: 16px;
-      }
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 28px; }
+    body { margin: 0; color: var(--text); font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 14px; line-height: 1.55; background: radial-gradient(ellipse at 50% 0, #e9f1ff 0, transparent 610px), var(--bg); }
+    button, input, textarea, select { font: inherit; }
+    button, a, input, textarea, select, summary { -webkit-tap-highlight-color: transparent; }
+    button, summary { cursor: pointer; }
+    button { transition: background .18s, border-color .18s, box-shadow .18s, transform .18s; }
+    button:disabled { cursor: not-allowed; opacity: .45; }
+    button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid #719bff; outline-offset: 4px; }
+    a { color: var(--accent-dark); text-underline-offset: 3px; }
+    svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; vertical-align: middle; }
+    [hidden] { display: none !important; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .skip-link { position: absolute; left: 16px; top: -100px; background: white; padding: 12px; z-index: 50; }
+    .skip-link:focus { top: 12px; }
+    nav { max-width: 1180px; margin: auto; padding: 23px 24px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .logo { display: inline-flex; align-items: center; gap: 9px; color: var(--text); text-decoration: none; font-size: 24px; font-weight: 800; letter-spacing: -1px; }
+    .logo > svg { padding: 7px; width: 34px; height: 34px; border-radius: 10px; background: var(--accent); color: #fff; }
+    .logo span { color: var(--accent); }
+    .nav-actions { display: flex; align-items: center; gap: 23px; }
+    .nav-link { text-decoration: none; color: var(--muted); font-size: 13px; font-weight: 600; }
+    .nav-button, .small-btn { border: 1px solid var(--border); background: #fff; color: var(--text); padding: 9px 13px; border-radius: 9px; font-weight: 600; font-size: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; }
+    .nav-button { color: var(--accent-dark); border-color: #cbdaf9; padding: 10px 16px; font-size: 13px; }
+    .small-btn:not(:disabled):hover, .nav-button:hover { background: var(--blue-light); border-color: #a9c1f5; }
+    .hero { max-width: 880px; margin: 51px auto 38px; padding: 0 24px; text-align: center; }
+    .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border: 1px solid #cadbff; border-radius: 99px; background: #f3f7ff; color: var(--accent-dark); font-size: 12px; font-weight: 600; margin-bottom: 20px; }
+    .badge svg { width: 14px; height: 14px; }
+    h1 { margin: 0 0 19px; font-size: clamp(38px, 5.6vw, 65px); font-weight: 780; letter-spacing: -2.8px; line-height: 1.08; }
+    h1 span { display: block; color: var(--accent); }
+    .hero > p { margin: 0 auto; max-width: 590px; font-size: 16px; line-height: 1.75; color: var(--muted); }
+    .hero-meta { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 20px; margin-top: 20px; font-size: 12px; color: #566883; }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 5px; }
+    .hero-meta svg { width: 14px; height: 14px; color: var(--accent); }
+    .app { max-width: 1180px; margin: 0 auto 42px; padding: 0 24px; display: grid; grid-template-columns: 420px minmax(0, 1fr); align-items: start; gap: 22px; }
+    .panel { background: var(--card); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow); min-width: 0; }
+    .input-panel { padding: 25px; }
+    .panel-heading { display: flex; align-items: center; gap: 10px; }
+    .step-icon { width: 33px; height: 33px; border-radius: 10px; background: var(--blue-light); color: var(--accent); display: grid; place-items: center; }
+    .panel-title { margin: 0; font-size: 18px; letter-spacing: -.4px; font-weight: 750; }
+    .panel-subtitle { margin: 7px 0 22px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .section-line { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-bottom: 12px; margin-bottom: 18px; border-bottom: 1px solid #edf1f8; }
+    .eyebrow { font-size: 10px; letter-spacing: 1.1px; font-weight: 750; color: #627493; text-transform: uppercase; }
+    .coverage { color: var(--muted); font-size: 11px; }
+    label, legend { display: block; font-size: 12px; font-weight: 650; margin-bottom: 6px; }
+    .optional { font-weight: 400; color: var(--muted); font-size: 11px; }
+    .field { margin-bottom: 17px; min-width: 0; }
+    .hint { display: block; font-size: 11px; line-height: 1.6; color: var(--muted); margin: 5px 0 0; }
+    input[type="text"], textarea, select { width: 100%; border: 1px solid #dbe3ef; border-radius: 9px; padding: 11px 12px; color: var(--text); background: #fbfcff; font-size: 13px; outline: none; transition: border-color .18s, box-shadow .18s; }
+    input::placeholder, textarea::placeholder { color: #7b89a0; opacity: 1; }
+    textarea { display: block; resize: vertical; min-height: 72px; line-height: 1.55; }
+    input[type="text"]:focus, textarea:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px #245de812; background: #fff; }
+    input[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: #bb3434; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+    fieldset legend { padding: 0; }
+    .format-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin-bottom: 17px; }
+    .type-btn { padding: 11px 3px 9px; display: flex; flex-direction: column; gap: 5px; align-items: center; background: #fff; border: 1px solid var(--border); border-radius: 9px; font-size: 11px; font-weight: 600; color: var(--muted); }
+    .type-btn[aria-pressed="true"] { color: var(--accent-dark); border-color: #779ffc; background: var(--blue-light); box-shadow: inset 0 0 0 .4px #779ffc; }
+    .type-btn:not([aria-pressed="true"]):hover { background: var(--soft); }
+    .detail-fields { border: 1px solid var(--border); border-radius: 10px; margin: 3px 0 18px; background: #fcfdff; }
+    .detail-fields summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 13px; font-size: 12px; font-weight: 650; }
+    summary::-webkit-details-marker { display: none; }
+    .detail-fields summary svg { width: 15px; height: 15px; transition: transform .15s; }
+    .detail-fields[open] summary > svg { transform: rotate(180deg); }
+    .detail-fields summary small { display: block; font-weight: 400; color: var(--muted); font-size: 10px; margin-top: 2px; }
+    .detail-body { padding: 4px 13px 0; }
+    .generate { width: 100%; display: flex; align-items: center; justify-content: center; gap: 9px; color: white; border: 1px solid var(--accent); border-radius: 10px; background: linear-gradient(130deg, #326df6, #2155d7); box-shadow: 0 6px 16px #245de821; padding: 13px 14px; font-size: 13px; font-weight: 700; }
+    .generate:hover { transform: translateY(-1px); box-shadow: 0 8px 21px #245de830; }
+    .save-row { display: flex; align-items: center; gap: 7px; margin: 13px 0 7px; color: var(--muted); font-size: 11px; font-weight: 400; }
+    input[type="checkbox"] { accent-color: var(--accent); margin: 0; width: 14px; height: 14px; }
+    .form-footer { display: flex; justify-content: space-between; align-items: center; gap: 8px; color: var(--muted); font-size: 10px; }
+    .text-btn { background: none; border: 0; padding: 3px 0; font-size: 11px; color: var(--accent-dark); text-decoration: underline; text-underline-offset: 3px; }
+    .form-error { margin: 0 0 12px; padding: 10px; color: #9e2929; background: #fff4f4; border-radius: 8px; font-size: 12px; }
+    .output-panel { padding: 25px; }
+    .output-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+    .output-header .panel-subtitle { margin-bottom: 19px; }
+    .status-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #8396b6; margin-right: 5px; vertical-align: 1px; }
+    .status-dot.ready { background: #208257; }
+    .output-actions { display: flex; gap: 6px; }
+    .output-actions .small-btn { padding: 8px 10px; }
+    .output-actions svg { width: 14px; height: 14px; }
+    .angle-label { margin-bottom: 8px; }
+    .angles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; margin-bottom: 19px; }
+    .angle { padding: 10px 7px; text-align: left; border: 1px solid var(--border); border-radius: 9px; background: #fff; color: var(--muted); line-height: 1.4; }
+    .angle strong { display: block; font-size: 11px; color: var(--text); font-weight: 650; }
+    .angle small { display: block; font-size: 10px; margin-top: 3px; }
+    .angle[aria-pressed="true"] { background: var(--blue-light); border-color: #a8c2fa; }
+    .angle[aria-pressed="true"] strong { color: var(--accent-dark); }
+    .tabs { display: flex; gap: 18px; border-bottom: 1px solid var(--border); margin-bottom: 18px; }
+    .tab { background: none; border: 0; border-bottom: 2px solid transparent; color: var(--muted); padding: 9px 0 10px; font-size: 12px; font-weight: 650; white-space: nowrap; }
+    .tab[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+    .script-box { border: 1px solid #e0e8f4; background: #fcfdff; border-radius: 12px; min-height: 380px; padding: 24px; overflow-wrap: anywhere; }
+    .placeholder { min-height: 333px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: var(--muted); }
+    .placeholder-icon { width: 60px; height: 60px; border-radius: 18px; background: var(--blue-light); display: grid; place-items: center; margin-bottom: 20px; color: var(--accent); transform: rotate(-5deg); }
+    .placeholder-icon svg { width: 29px; height: 29px; }
+    .placeholder strong { color: var(--text); font-size: 16px; letter-spacing: -.3px; }
+    .placeholder p { max-width: 290px; font-size: 12px; line-height: 1.8; margin: 8px 0 17px; }
+    .placeholder .small-btn { font-size: 11px; }
+    .empty-steps { display: flex; justify-content: center; gap: 12px; margin-top: 30px; color: #71819c; font-size: 10px; }
+    .empty-steps span { display: flex; align-items: center; gap: 5px; }
+    .empty-steps b { display: grid; place-items: center; border: 1px solid #dae4f4; width: 18px; height: 18px; border-radius: 50%; font-size: 9px; color: var(--accent-dark); font-weight: 500; }
+    .script-section + .script-section { margin-top: 23px; }
+    .script-label { margin: 0 0 7px; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: #4c6fa8; font-weight: 750; }
+    .script-text { font-size: 14px; line-height: 1.85; margin: 0; white-space: pre-wrap; }
+    .delivery-cue { margin: 8px 0 0; color: #6d7c92; font-size: 11px; font-style: italic; }
+    .script-section:first-child .script-text { color: #152f56; }
+    .view-intro { margin: 0 0 21px; color: var(--muted); font-size: 12px; line-height: 1.75; }
+    .reply-card + .reply-card { margin-top: 19px; padding-top: 18px; border-top: 1px solid #e5ebf5; }
+    .reply-card h3, .coach-card h3 { font-size: 12px; margin: 0 0 7px; color: #284a7c; }
+    .reply-card p { margin: 0; font-size: 13px; line-height: 1.85; white-space: pre-wrap; }
+    .reply-card .delivery-cue { font-size: 11px; margin-top: 7px; }
+    .coach-card { padding: 14px; background: #fff; border: 1px solid #e0e8f4; border-radius: 9px; margin-bottom: 11px; }
+    .coach-card p { margin: 0; font-size: 12px; color: var(--muted); line-height: 1.8; }
+    .coach-card .text-btn { margin-top: 8px; }
+    .stats { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 10px; color: var(--muted); margin-top: 11px; }
+    .result-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 19px; padding-top: 17px; border-top: 1px solid #edf1f8; }
+    .result-footer p { font-size: 10px; color: var(--muted); margin: 0; max-width: 250px; }
+    .result-footer .small-btn { flex-shrink: 0; font-size: 11px; }
+    .stale-note, .sample-note { background: #edf4ff; border: 1px solid #d5e3fb; border-radius: 8px; font-size: 11px; color: #335789; padding: 10px 12px; margin: 0 0 15px; }
+    .stale-note { background: #fff8e8; border-color: #ebdaaa; color: #755818; }
+    .brief-tip { display: flex; align-items: flex-start; gap: 10px; border-radius: 10px; background: var(--soft); padding: 13px; margin-top: 18px; }
+    .brief-tip svg { color: var(--accent); width: 16px; height: 16px; margin-top: 2px; }
+    .brief-tip p { margin: 0; font-size: 11px; color: var(--muted); line-height: 1.7; }
+    .brief-tip strong { color: #34517e; }
+    .method { max-width: 1132px; margin: 0 auto 42px; padding: 0 25px; }
+    .method > details { border-top: 1px solid var(--border); }
+    .method summary { display: flex; justify-content: space-between; align-items: center; padding: 21px 0 12px; color: #415674; font-size: 12px; font-weight: 650; gap: 12px; }
+    .method summary span { color: var(--muted); font-size: 11px; font-weight: 400; }
+    .method summary svg { width: 15px; height: 15px; margin-left: 8px; }
+    .method-content { color: var(--muted); font-size: 12px; line-height: 1.9; padding-bottom: 12px; }
+    .method-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .method-grid h3 { color: #34517e; font-size: 12px; margin-bottom: 5px; }
+    .method-grid p { margin: 0; }
+    .source-note { font-size: 11px; padding-top: 12px; border-top: 1px solid var(--border); }
+    footer { border-top: 1px solid var(--border); padding: 24px; display: flex; justify-content: space-between; max-width: 1132px; margin: auto; color: #6e7f97; font-size: 10px; gap: 15px; }
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 18px); background: #18345e; color: white; padding: 12px 18px; border-radius: 10px; font-size: 12px; box-shadow: 0 10px 35px #16365f20; opacity: 0; pointer-events: none; transition: .2s; z-index: 100; max-width: min(440px, calc(100vw - 32px)); text-align: center; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    @media (min-width: 1050px) { .output-panel { position: sticky; top: 22px; } }
+    @media (max-width: 1049px) and (min-width: 851px) { .app { grid-template-columns: 370px minmax(0, 1fr); gap: 16px; } .input-panel, .output-panel { padding: 21px; } .output-header { flex-wrap: wrap; gap: 0; } .output-actions { margin-bottom: 16px; } .angles { grid-template-columns: 1fr; } .angle small { display: inline; margin-left: 5px; } .angle strong { display: inline; } }
+    @media (max-width: 850px) { .app { grid-template-columns: minmax(0, 1fr); max-width: 660px; } .hero { margin-top: 33px; } .hero > p { font-size: 15px; } .method { max-width: 660px; } .output-panel { scroll-margin-top: 16px; } }
+    @media (max-width: 500px) { nav { padding: 18px; } .nav-link { display: none; } .nav-button { padding: 9px 12px; font-size: 12px; } .hero { padding: 0 20px; margin: 29px auto 28px; } h1 { font-size: 39px; letter-spacing: -1.8px; } .hero > p { font-size: 14px; } .hero-meta { gap: 7px 12px; font-size: 10px; } .app { padding: 0 13px; gap: 16px; } .input-panel, .output-panel { padding: 20px 17px; border-radius: 14px; } .output-header { flex-wrap: wrap; gap: 0; } .output-actions { margin-bottom: 18px; } .script-box { padding: 19px 16px; } .angle strong { font-size: 10px; } .angle small { font-size: 9px; } .angle { padding: 9px 6px; } .tabs { gap: 18px; } .tab { font-size: 11px; } .script-text { font-size: 14px; } .result-footer { align-items: flex-start; } .method { margin-bottom: 22px; padding: 0 24px; } .method summary span { display: none; } .method-grid { grid-template-columns: 1fr; gap: 5px; } footer { flex-direction: column; gap: 5px; padding: 20px 24px; } }
+    @media (max-width: 360px) { .row { grid-template-columns: 1fr; gap: 0; } .tabs { gap: 13px; } h1 { font-size: 35px; } .result-footer { flex-direction: column; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+    @media print { body { background: white; } nav, .hero, .input-panel, .method, footer, .output-actions, .angles, .angle-label, .tabs, .result-footer, .brief-tip, .toast, .sample-note, .stale-note { display: none !important; } .app { display: block; padding: 0; margin: 0; max-width: none; } .output-panel { border: 0; box-shadow: none; position: static; padding: 0; } .script-box { border: 0; padding: 0; background: white; } .script-section, .reply-card, .coach-card { break-inside: avoid; } }
   </style>
 </head>
-
 <body>
-
-  <nav>
-    <div class="logo">Script<span>ly</span></div>
-    <button class="nav-button" onclick="loadExample()">Try Example</button>
+  <svg class="sr-only" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6L12 3Z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H4l-2 2V11.5a9.5 9.5 0 0 1 19 0Z"/><path d="M7 9h9M7 13h6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="m8 3 2 5-3 2c1.5 3 3.5 5 6.5 6.5l2-3 5 2v4a2 2 0 0 1-2 2C9 20 4 15 3 5a2 2 0 0 1 2-2h3Z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="13" rx="4"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V3H3v13h5"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M6 6a8 8 0 0 1 13 3M18 18A8 8 0 0 1 5 15"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M9 21h6M8 14a7 7 0 1 1 8 0c-1 1-1 2-1 2H9s0-1-1-2Z"/></symbol>
+  </svg>
+  <a class="skip-link" href="#builder">Skip to pitch builder</a>
+  <nav aria-label="Main navigation">
+    <a class="logo" href="#top" aria-label="Scriptly home"><svg aria-hidden="true"><use href="#i-message"/></svg><div>Script<span>ly</span></div></a>
+    <div class="nav-actions"><a class="nav-link" href="#method" id="methodLink">How it works</a><button class="nav-button" type="button" data-example>Try an example <svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
   </nav>
-
-  <section class="hero">
-
-    <div class="badge">
-      ✦ Sales scripts in seconds
-    </div>
-
-    <h1>
-      Turn your product into a
-      <span>sales conversation.</span>
-    </h1>
-
-    <p>
-      Create persuasive phone calls and DM scripts tailored to your product,
-      customer and selling style — without staring at a blank page.
-    </p>
-
-  </section>
-
-  <main class="app">
-
-    <!-- INPUT PANEL -->
-
-    <section class="panel">
-
-      <div class="panel-title">Build your script</div>
-
-      <div class="panel-subtitle">
-        Tell us about what you're selling.
-      </div>
-
-      <label>What are you selling?</label>
-
-      <input
-        id="product"
-        type="text"
-        placeholder="e.g. Social media management"
-      >
-
-      <label>Who are you selling to?</label>
-
-      <input
-        id="customer"
-        type="text"
-        placeholder="e.g. Local restaurants"
-      >
-
-      <div class="row">
-
-        <div>
-          <label>Price</label>
-
-          <input
-            id="price"
-            type="text"
-            placeholder="e.g. R2,500/month"
-          >
-        </div>
-
-        <div>
-          <label>Tone</label>
-
-          <select id="tone">
-            <option value="professional">Professional</option>
-            <option value="friendly">Friendly</option>
-            <option value="confident">Confident</option>
-            <option value="casual">Casual</option>
-            <option value="luxury">Premium</option>
-          </select>
-        </div>
-
-      </div>
-
-      <label>Customer's biggest problem</label>
-
-      <textarea
-        id="problem"
-        placeholder="What problem does your customer have?"
-      ></textarea>
-
-      <label>Key benefits</label>
-
-      <textarea
-        id="benefits"
-        placeholder="What makes your product valuable?"
-      ></textarea>
-
-      <label>Script type</label>
-
-      <div class="type-buttons">
-
-        <button
-          class="type-btn active"
-          data-type="phone"
-          onclick="selectType(this)"
-        >
-          ☎ Phone Call
-        </button>
-
-        <button
-          class="type-btn"
-          data-type="dm"
-          onclick="selectType(this)"
-        >
-          💬 DM
-        </button>
-
-      </div>
-
-      <button class="generate" onclick="generateScript()">
-        ✦ Generate Sales Script
-      </button>
-
+  <header class="hero" id="top">
+    <div class="badge"><svg aria-hidden="true"><use href="#i-spark"/></svg>A better way to start the conversation</div>
+    <h1>Turn your idea into a <span>sales conversation.</span></h1>
+    <p>Find the right words for your product, service or big idea.<br>Answer a few simple questions. Leave with a pitch that sounds like you.</p>
+    <div class="hero-meta"><span><svg aria-hidden="true"><use href="#i-check"/></svg>Free to use</span><span><svg aria-hidden="true"><use href="#i-check"/></svg>No sign-up</span><span><svg aria-hidden="true"><use href="#i-check"/></svg>Four pitch formats</span></div>
+  </header>
+  <main class="app" id="builder">
+    <section class="panel input-panel" aria-labelledby="builderTitle">
+      <div class="panel-heading"><div class="step-icon"><svg aria-hidden="true"><use href="#i-spark"/></svg></div><h2 class="panel-title" id="builderTitle">Build your script</h2></div>
+      <p class="panel-subtitle">Start with four simple answers. A little detail goes a long way.</p>
+      <form id="pitchForm" novalidate>
+        <div class="section-line"><span class="eyebrow">01 / The essentials</span><span class="coverage" id="coverage">0 of 4 answered</span></div>
+        <div class="field"><label for="product">What are you offering?</label><input id="product" name="product" type="text" required maxlength="120" placeholder="e.g. A one-page website with online booking" aria-describedby="productHint"><p class="hint" id="productHint">Describe the product, service or idea in one short line.</p></div>
+        <div class="field"><label for="customer">Who is it for?</label><input id="customer" name="customer" type="text" required maxlength="120" placeholder="e.g. Independent beauty salon owners" aria-describedby="customerHint"><p class="hint" id="customerHint">Be specific. Think of the person making the decision.</p></div>
+        <div class="field"><label for="problem">What is making things difficult for them?</label><textarea id="problem" name="problem" required maxlength="280" placeholder="e.g. They lose bookings when Instagram messages get missed." aria-describedby="problemHint"></textarea><p class="hint" id="problemHint">One real frustration. Describe what happens in their day.</p></div>
+        <div class="field"><label for="benefits">What would a better result look like?</label><textarea id="benefits" name="benefits" required maxlength="280" placeholder="e.g. Clients can see prices and request a booking in one place." aria-describedby="benefitsHint"></textarea><p class="hint" id="benefitsHint">Describe the outcome they want, rather than a list of features.</p></div>
+        <div class="section-line"><span class="eyebrow">02 / Make it sound like you</span></div>
+        <fieldset><legend>Where will you use this pitch?</legend><div class="format-grid" id="formatButtons">
+          <button class="type-btn" type="button" data-type="phone" aria-pressed="true"><svg aria-hidden="true"><use href="#i-phone"/></svg>Phone</button>
+          <button class="type-btn" type="button" data-type="dm" aria-pressed="false"><svg aria-hidden="true"><use href="#i-message"/></svg>DM</button>
+          <button class="type-btn" type="button" data-type="email" aria-pressed="false"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email</button>
+          <button class="type-btn" type="button" data-type="live" aria-pressed="false"><svg aria-hidden="true"><use href="#i-mic"/></svg>In person</button>
+        </div></fieldset>
+        <div class="row"><div class="field"><label for="tone">Your tone</label><select id="tone" name="tone"><option value="professional">Professional</option><option value="friendly">Friendly</option><option value="confident">Confident</option><option value="casual">Casual</option><option value="premium">Premium</option></select></div><div class="field"><label for="length">How much detail?</label><select id="length" name="length"><option value="brief">Keep it brief</option><option value="detailed">A little more detail</option></select></div></div>
+        <div class="field"><label for="goal">What should happen next?</label><select id="goal" name="goal"><option value="breakdown">Send a short breakdown</option><option value="call">Book a 10-minute chat</option><option value="demo">Arrange a demonstration</option><option value="pilot">Discuss a small pilot</option><option value="custom">Write my own next step</option></select></div>
+        <div class="field" id="customGoalField" hidden><label for="customGoal">Write the question you want to end with</label><input id="customGoal" name="customGoal" type="text" maxlength="180" placeholder="e.g. Could we review the proposal on Thursday?"></div>
+        <details class="detail-fields" id="extraDetails"><summary><div>Make it more specific <span class="optional">· optional</span><small id="detailCount">Add your difference, evidence or timing.</small></div><svg aria-hidden="true"><use href="#i-chevron"/></svg></summary><div class="detail-body">
+          <div class="field"><label for="difference">What do you do differently?</label><textarea id="difference" name="difference" maxlength="280" placeholder="e.g. I connect the booking button to their existing WhatsApp, so they keep the tools they know." aria-describedby="differenceHint"></textarea><p class="hint" id="differenceHint">Explain how it works. “High quality” is less useful than a specific approach.</p></div>
+          <div class="field"><label for="proof">What real evidence can you share?</label><textarea id="proof" name="proof" maxlength="280" placeholder="e.g. In our 4-week pilot, the team reduced missed enquiries from 12 to 4." aria-describedby="proofHint"></textarea><p class="hint" id="proofHint">Use a verified result, demonstration or relevant experience. Leave blank if you have none yet.</p></div>
+          <div class="field"><label for="alternative">What are they doing instead, right now?</label><input id="alternative" name="alternative" type="text" maxlength="160" placeholder="e.g. Taking bookings through scattered DMs"></div>
+          <div class="field"><label for="whyNow">Is there a real reason to act now?</label><textarea id="whyNow" name="whyNow" maxlength="220" placeholder="e.g. Their new branch opens next month." aria-describedby="timingHint"></textarea><p class="hint" id="timingHint">A genuine event, change or deadline. Leave blank if there isn't one.</p></div>
+          <div class="field"><label for="price">What is the price or commitment?</label><input id="price" name="price" type="text" maxlength="100" placeholder="e.g. R1,500 once-off, or 2 hours for a pilot"></div>
+          <div class="row"><div class="field"><label for="sender">Your name <span class="optional">· optional</span></label><input id="sender" name="sender" type="text" maxlength="70" placeholder="e.g. Avesh" autocomplete="given-name"></div><div class="field"><label for="recipient">Their name <span class="optional">· optional</span></label><input id="recipient" name="recipient" type="text" maxlength="70" placeholder="e.g. Taylor"></div></div>
+          <div class="field"><label for="relationship">Have you spoken before?</label><select id="relationship" name="relationship"><option value="cold">No, this is the first conversation</option><option value="warm">Yes, we've already discussed it</option></select></div>
+        </div></details>
+        <p class="form-error" id="formError" role="alert" hidden></p>
+        <button class="generate" type="submit" id="generateBtn"><svg aria-hidden="true"><use href="#i-spark"/></svg><span id="generateLabel">Generate my pitch</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <label class="save-row"><input id="remember" type="checkbox">Remember this brief on this device</label>
+        <div class="form-footer"><span id="saveStatus">Your pitch is built in your browser.</span><button class="text-btn" type="button" id="resetBtn">Clear brief</button></div>
+      </form>
     </section>
-
-
-    <!-- OUTPUT PANEL -->
-
-    <section class="panel output-panel">
-
-      <div class="output-header">
-
-        <div>
-          <div class="panel-title">Your sales script</div>
-
-          <div class="panel-subtitle">
-            Ready to copy and use.
-          </div>
-        </div>
-
-        <div class="output-actions">
-
-          <button
-            class="small-btn"
-            onclick="copyScript()"
-          >
-            Copy
-          </button>
-
-          <button
-            class="small-btn"
-            onclick="generateScript()"
-          >
-            Regenerate
-          </button>
-
-        </div>
-
+    <section class="panel output-panel" id="results" aria-labelledby="outputTitle" tabindex="-1">
+      <div class="output-header"><div><h2 class="panel-title" id="outputTitle">Your sales script</h2><p class="panel-subtitle"><span class="status-dot" id="statusDot"></span><span id="outputStatus">Ready when you are</span></p></div><div class="output-actions"><button class="small-btn" id="copyBtn" type="button" disabled><svg aria-hidden="true"><use href="#i-copy"/></svg>Copy</button><button class="small-btn" id="downloadBtn" type="button" disabled aria-label="Download all pitch materials" title="Download all pitch materials"><svg aria-hidden="true"><use href="#i-download"/></svg><span class="sr-only">Download all</span></button></div></div>
+      <p id="sampleNote" class="sample-note" hidden>Example brief loaded. The offer details below are illustrative—replace them with your own.</p>
+      <p id="staleNote" class="stale-note" role="status" hidden>Your brief has changed. Generate again to update your pitch.</p>
+      <div class="eyebrow angle-label">Choose your angle</div>
+      <div class="angles" role="group" aria-label="Pitch angle">
+        <button class="angle" type="button" data-angle="direct" aria-pressed="true" disabled><strong>Clear &amp; direct</strong><small>Lead with the value</small></button>
+        <button class="angle" type="button" data-angle="curiosity" aria-pressed="false" disabled><strong>Curiosity first</strong><small>Open a new question</small></button>
+        <button class="angle" type="button" data-angle="reframe" aria-pressed="false" disabled><strong>Fresh perspective</strong><small>Shift the conversation</small></button>
       </div>
-
-      <div
-        id="output"
-        class="script-box"
-      >
-
-        <div class="placeholder">
-
-          <div>
-
-            <div class="placeholder-icon">
-              ✦
-            </div>
-
-            <strong>Your script will appear here</strong>
-
-            <p style="margin-top:8px">
-              Fill in your product details and hit
-              "Generate Sales Script".
-            </p>
-
-          </div>
-
-        </div>
-
+      <div class="tabs" role="tablist" aria-label="Pitch materials">
+        <button class="tab" type="button" role="tab" id="tab-pitch" data-view="pitch" aria-selected="true" aria-controls="output" tabindex="0" disabled>Pitch</button>
+        <button class="tab" type="button" role="tab" id="tab-followup" data-view="followup" aria-selected="false" aria-controls="output" tabindex="-1" disabled>Follow-up</button>
+        <button class="tab" type="button" role="tab" id="tab-objections" data-view="objections" aria-selected="false" aria-controls="output" tabindex="-1" disabled>Objections</button>
+        <button class="tab" type="button" role="tab" id="tab-coach" data-view="coach" aria-selected="false" aria-controls="output" tabindex="-1" disabled>Coach</button>
       </div>
-
-      <div class="stats">
-
-        <span id="wordCount">0 words</span>
-
-        <span id="charCount">0 characters</span>
-
+      <div class="script-box" id="output" role="tabpanel" aria-labelledby="tab-pitch" tabindex="0">
+        <div class="placeholder" id="emptyState"><div class="placeholder-icon"><svg aria-hidden="true"><use href="#i-message"/></svg></div><strong>Your next great conversation starts here.</strong><p>Tell us what you offer and who you want to reach. We'll help you find an opening, a clear story and a next step.</p><button class="small-btn" type="button" data-example>Show me an example <svg aria-hidden="true"><use href="#i-arrow"/></svg></button><div class="empty-steps"><span><b>1</b>Add your details</span><span><b>2</b>Pick an angle</span><span><b>3</b>Make it yours</span></div></div>
       </div>
-
+      <div class="stats" id="stats"><span id="wordCount">0 words</span><span id="charCount">0 characters</span><span id="readTime">Your reading time will appear here</span></div>
+      <div class="result-footer"><p id="reviewNote">A clear conversation starts with a specific idea.</p><button class="small-btn" type="button" id="regenerateBtn" disabled><svg aria-hidden="true"><use href="#i-refresh"/></svg>New wording</button></div>
+      <div class="brief-tip"><svg aria-hidden="true"><use href="#i-bulb"/></svg><p><strong>Specific beats impressive.</strong> “A booking page connected to WhatsApp” tells a clearer story than “an innovative digital solution.”</p></div>
     </section>
-
   </main>
-
-  <footer>
-    © 2026 Scriptly. Built for people who sell.
-  </footer>
-
-  <div
-    id="toast"
-    class="toast"
-  >
-    Copied to clipboard
-  </div>
-
-
+  <section class="method" id="method" aria-label="About this pitch builder"><details id="methodDetails"><summary>Better pitches begin with better questions.<span>Explore the thinking behind Scriptly <svg aria-hidden="true"><use href="#i-chevron"/></svg></span></summary><div class="method-content"><div class="method-grid"><div><h3>Give the idea a clear shape</h3><p>Start with a specific audience, a recognizable problem and a useful outcome. Explain the difference in your approach without burying the idea in features.</p></div><div><h3>Give people a reason to listen</h3><p>Try a relevant question or a fresh perspective. Add a real result and a genuine reason for the timing when you have them.</p></div><div><h3>Make the next step easy</h3><p>Keep the opening focused, invite a response and ask for one clear next step. A confident pitch leaves room for both people to decide whether it fits.</p></div></div><p class="source-note">Inspired by Oren Klaff's <cite>Pitch Anything</cite>, particularly Chapter 2 (framing and intrigue), Chapter 4 (the big idea, difference and timing) and Chapter 6 (confident delivery). These are original adaptations, not excerpts or an endorsement.</p><p><strong>How generation works:</strong> Scriptly combines your answers with built-in writing patterns, contextual openings and the selected format, tone and angle. It runs in your browser without an external AI service. It only adds evidence, prices and deadlines that you enter, and does not verify those claims. Review your pitch before using it. Optional saved briefs stay in this browser; basic website analytics may be enabled.</p></div></details></section>
+  <footer><span>© <span id="year">2026</span> Scriptly. Built for people with something to offer.</span><span>Find the words. Start the conversation.</span></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  <div class="sr-only" id="announcement" aria-live="polite" aria-atomic="true"></div>
+  <noscript><p style="padding:24px;text-align:center">Please enable JavaScript to use the pitch builder.</p></noscript>
 <script>
+/*
+ * SCRIPTLY — a self-contained, browser-based pitch builder.
+ * No API keys, build step, model inference, external fonts or UI dependencies.
+ * The supplied book informed the original writing patterns below:
+ * - Chapter 2: framing / intrigue / mutual fit (PDF pages 44, 54–58, 67).
+ * - Chapter 4: clear big idea / genuine timing / differentiation (PDF pages 92–101).
+ * - Chapter 6: calm, confident delivery (PDF page 145 onward).
+ * No book excerpts, invented customer stories, fake scarcity or inferred ROI.
+ * Treat proof and timing as user-supplied claims; this engine cannot verify them.
+ * For true open-ended AI generation, add a secure server endpoint separately.
+ * NEVER put a secret API key in this HTML.
+ */
+'use strict';
 
-  let scriptType = "phone";
-
-  function selectType(button) {
-
-    document
-      .querySelectorAll(".type-btn")
-      .forEach(btn => btn.classList.remove("active"));
-
-    button.classList.add("active");
-
-    scriptType = button.dataset.type;
-  }
-
-
-  function generateScript() {
-
-    const product =
-      document.getElementById("product").value.trim();
-
-    const customer =
-      document.getElementById("customer").value.trim();
-
-    const price =
-      document.getElementById("price").value.trim();
-
-    const problem =
-      document.getElementById("problem").value.trim();
-
-    const benefits =
-      document.getElementById("benefits").value.trim();
-
-    const tone =
-      document.getElementById("tone").value;
-
-    if (!product || !customer) {
-
-      showToast("Please enter your product and customer.");
-
-      return;
+// Pure functions are separate from the interface so writing behavior can be tested.
+const PitchEngine = (() => {
+  const clean = value => String(value || '').normalize('NFC').replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, '').replace(/\s+/g, ' ').trim();
+  const fragment = value => clean(value).replace(/[.!?;]+$/u, '');
+  const sentence = value => { const s = clean(value); return s ? s + (/[.!?…]["'”’)]?$/u.test(s) ? '' : '.') : ''; };
+  const pick = (list, version, offset = 0) => list[(version + offset) % list.length];
+  const words = value => (clean(value).match(/\S+/g) || []).length;
+  const formatNames = { phone: 'Phone call', dm: 'Direct message', email: 'Email', live: 'In-person pitch' };
+  const angleNames = { direct: 'Clear & direct', curiosity: 'Curiosity first', reframe: 'Fresh perspective' };
+  const toneNames = { professional: 'Professional', friendly: 'Friendly', confident: 'Confident', casual: 'Casual', premium: 'Premium' };
+  const styles = {
+    professional: { greet: 'Hi', permission: 'May I share a brief proposal and see whether it’s relevant?', idea: 'The idea is straightforward', outcome: 'The intended result', mechanism: 'Here’s how it works', proof: 'One piece of evidence to consider', agree: 'That’s a fair question.', end: 'Best' },
+    friendly: { greet: 'Hi', permission: 'Have you got a moment? I’d like to run an idea past you.', idea: 'Here’s the idea', outcome: 'The goal is simple', mechanism: 'The useful part is this', proof: 'Here’s something concrete I can share', agree: 'I understand.', end: 'Thanks' },
+    confident: { greet: 'Hi', permission: 'I have a focused proposal. Is now a good time for the short version?', idea: 'Here’s the proposition', outcome: 'The result we’re aiming for', mechanism: 'The difference is in the approach', proof: 'Here’s the evidence', agree: 'Fair point.', end: 'Best' },
+    casual: { greet: 'Hey', permission: 'Got a moment for a quick idea?', idea: 'Here’s the short version', outcome: 'The goal', mechanism: 'Here’s how it works', proof: 'Something concrete to go on', agree: 'That’s fair.', end: 'Cheers' },
+    premium: { greet: 'Hello', permission: 'May I briefly outline an idea and hear your perspective?', idea: 'The proposal is focused', outcome: 'The experience we’re aiming for', mechanism: 'The distinction is in the details', proof: 'A relevant example', agree: 'Of course.', end: 'Kind regards' }
+  };
+  // Contextual openings are questions or possibilities, never claimed facts.
+  const contexts = [
+    { id: 'booking', matches: /\b(bookings?|appointments?|salons?|enquiries|inquiries)\b/gi, curiosity: ['What happens between someone being interested and actually making a booking?', 'Could the next booking start with a clearer next step?', 'Where does interest turn into an appointment—and where does it get stuck?', 'If a customer wanted to book right now, how easy would that be?'], reframe: ['What if the next opportunity is already interested, but needs a simpler way to act?', 'Before trying to attract more attention, could we make better use of the attention already there?', 'Could a clearer path from interest to action matter as much as getting seen?', 'What would change if booking felt like one clear decision?'], test: 'Walk through one enquiry from first interest to the booking decision. Note where someone has to wait, repeat a step or ask for missing information.' },
+    { id: 'content', matches: /\b(social media|content|posts?|posting|instagram|marketing)\b/gi, curiosity: ['What should someone do after they see your next post?', 'Could your content give people a clearer reason to start a conversation?', 'If your next post could answer one customer question, which would you choose?', 'What would make your next piece of content useful enough to act on?'], reframe: ['What if the brief started with the customer’s next step, rather than the next post?', 'Before adding more content, could each piece have a clearer job?', 'Could answering a real customer question be more useful than chasing the next trend?', 'What if you planned the next conversation first, and the content second?'], test: 'Take one existing post and map the path from seeing it to taking the desired next step. Check whether a new customer can follow that path.' },
+    { id: 'time', matches: /\b(time|hours?|admin|manual|repetitive|spreadsheets?|automation|workflows?)\b/gi, curiosity: ['Which repeated task would you most like to stop doing twice?', 'If one part of the week became easier, where would you want to start?', 'Where does a simple task turn into unnecessary back-and-forth?', 'Which part of the process takes effort without moving the work forward?'], reframe: ['What if the first improvement was one less step, rather than one more tool?', 'Before working faster, could we remove something that makes the work slow?', 'Could a better handover be more valuable than another reminder?', 'What would the process look like if you designed it around the person doing the work?'], test: 'Time one repeatable task before and after a small, agreed trial. Include setup and checking time, not just the fastest step.' },
+    { id: 'cost', matches: /\b(costs?|spend|budget|expenses?|waste|overheads?)\b/gi, curiosity: ['Which recurring cost is hardest to connect to a useful result?', 'What would you want to measure before calling a change good value?', 'Where would a small improvement make the spending easier to justify?', 'Which part of the current approach is worth its cost—and which part needs a closer look?'], reframe: ['What if the decision started with what good value looks like, before comparing prices?', 'Could the total effort matter as much as the number on the invoice?', 'Before choosing the cheapest option, what would a useful outcome need to include?', 'What would you keep paying for if every cost had to earn its place?'], test: 'Agree what costs to count, including setup and ongoing effort. Compare the same scope over the same period; do not assume savings.' },
+    { id: 'learning', matches: /\b(learn|learning|students?|teach|teaching|lessons?|training|skills?|course|practice)\b/gi, curiosity: ['What should someone be able to do afterwards that they cannot do confidently now?', 'Where does understanding the idea stop short of using it?', 'What would make the next practice session feel useful?', 'Which small improvement would make the biggest difference to their confidence?'], reframe: ['What if the starting point was something they need to do, rather than more information to cover?', 'Could the next step be a better chance to practise, rather than another explanation?', 'What would change if progress meant applying one skill well?', 'Before adding another lesson, where would support make practice more useful?'], test: 'Agree on one task the learner should be able to perform. Compare their attempt before and after the session with the same clear criteria.' },
+    { id: 'team', matches: /\b(team|staff|employees?|handover|collaboration|meetings?|approvals?)\b/gi, curiosity: ['Where does a clear task become unclear once it changes hands?', 'What would help the next person act without another meeting?', 'Which decision is taking more back-and-forth than it should?', 'If everyone knew the next step, what would become easier?'], reframe: ['What if the fix was clearer ownership, rather than another status update?', 'Could the next handover do more of the work that a meeting does now?', 'Before asking for more effort, where could the team use more clarity?', 'What would change if the next action was obvious to everyone involved?'], test: 'Choose one handover or decision. Agree who owns the next action and check whether the change reduces clarification without losing important information.' }
+  ];
+  function contextFor(d) {
+    // Problem and outcome carry more weight than the product category.
+    const core = `${d.problem} ${d.benefits}`;
+    let best = null, score = 0;
+    for (const c of contexts) {
+      const n = (core.match(c.matches) || []).length * 3 + (`${d.product} ${d.customer} ${d.difference}`.match(c.matches) || []).length;
+      if (n > score) { score = n; best = c; }
     }
-
-    const output = document.getElementById("output");
-
-    let script = "";
-
-    if (scriptType === "phone") {
-
-      script = generatePhoneScript(
-        product,
-        customer,
-        price,
-        problem,
-        benefits,
-        tone
-      );
-
+    return best;
+  }
+  function normalize(input) {
+    const keys = ['product','customer','problem','benefits','difference','proof','alternative','whyNow','price','sender','recipient','customGoal'];
+    const d = Object.fromEntries(keys.map(k => [k, clean(input[k])]));
+    d.type = Object.hasOwn(formatNames, input.type) ? input.type : 'phone';
+    d.tone = Object.hasOwn(styles, input.tone) ? input.tone : 'professional';
+    d.length = input.length === 'detailed' ? 'detailed' : 'brief';
+    d.relationship = input.relationship === 'warm' ? 'warm' : 'cold';
+    d.goal = ['breakdown','call','demo','pilot','custom'].includes(input.goal) ? input.goal : 'breakdown';
+    return d;
+  }
+  function nextStep(d, version) {
+    const friendly = ['friendly', 'casual'].includes(d.tone);
+    const direct = d.tone === 'confident';
+    const options = {
+      breakdown: friendly ? ['Want a short breakdown to see if it fits?', 'Would a short breakdown be useful?'] : direct ? ['Shall I send a short breakdown so you can assess the fit?', 'Is a short breakdown the right next step?'] : ['Would you like a short breakdown to assess whether it fits?', 'Would a short breakdown help you decide whether to explore this?'],
+      call: friendly ? ['Would a 10-minute chat be useful to see if this fits?', 'Want to set aside 10 minutes to talk it through?'] : ['Would you be open to a 10-minute conversation to assess the fit?', 'Shall we arrange 10 minutes to discuss whether this fits your priorities?'],
+      demo: ['Would you like to arrange a demonstration to see how the approach works?', 'Would a demonstration help you assess whether this fits?'],
+      pilot: ['Would you be open to discussing a small pilot with a clear scope and success measure?', 'Shall we explore what a small, measurable pilot would involve?']
+    };
+    if (d.goal === 'custom') return /[.!?]$/.test(d.customGoal) ? d.customGoal : `${d.customGoal}?`;
+    return pick(options[d.goal], version);
+  }
+  function hook(d, angle, v) {
+    const c = contextFor(d);
+    if (angle === 'direct') return pick([
+      `Here’s a practical idea for ${fragment(d.customer)}.`,
+      `I’d like to put one useful outcome on the table for ${fragment(d.customer)}.`,
+      `Let’s start with what this could change for ${fragment(d.customer)}.`,
+      `A focused proposal for ${fragment(d.customer)}.`
+    ], v);
+    if (angle === 'curiosity') return c ? pick(c.curiosity, v) : pick([
+      `What would meaningful progress look like for ${fragment(d.customer)}?`,
+      'Which part of the current approach would you change first?',
+      'What would make this problem worth solving now?',
+      'If one thing could work better, what would you want that to be?'
+    ], v);
+    if (d.alternative && v % 2 === 0) return `What if we looked beyond “${fragment(d.alternative)}” and started with the result you actually want?`;
+    return c ? pick(c.reframe, v) : pick([
+      'What if we worked backwards from the result, instead of starting with the solution?',
+      'Before choosing an approach, what would a useful result actually look like?',
+      'Could a smaller, more focused change be a better place to start?',
+      'What would we do differently if the next step had to be easy to test?'
+    ], v);
+  }
+  function create(input, requestedAngle = 'direct', version = 0) {
+    const d = normalize(input);
+    if (['product','customer','problem','benefits'].some(k => !d[k])) throw new Error('Complete the four essential answers first.');
+    if (d.goal === 'custom' && !d.customGoal) throw new Error('Add the question you want to end with.');
+    const angle = Object.hasOwn(angleNames, requestedAngle) ? requestedAngle : 'direct';
+    const v = Math.max(0, Math.floor(Number(version) || 0)) % 4;
+    const t = styles[d.tone], c = contextFor(d);
+    const hello = `${t.greet}${d.recipient ? ` ${d.recipient}` : ''}`;
+    const introName = d.sender ? `I’m ${d.sender}. ` : '';
+    const openingHook = hook(d, angle, v);
+    const callToAction = nextStep(d, v);
+    const completeProblem = /^(they|their|the|a|an|it|we|our|you|your|clients?|customers?|owners?|people|teams?|students?|staff|potential|many|most|some|current)\b/i.test(d.problem) && /\b(is|are|was|were|have|has|can|cannot|can't|don’t|doesn’t|don't|doesn't|miss|misses|lose|loses|struggle|struggles|need|needs|take|takes|feel|feels|find|finds|spend|spends)\b/i.test(d.problem);
+    const problemLine = completeProblem ? sentence(d.problem) : pick([
+      `The challenge: ${sentence(d.problem)}`,
+      `The problem I’m focused on is this: ${sentence(d.problem)}`,
+      `Here’s the situation this is designed for: ${sentence(d.problem)}`,
+      `The starting point is a specific problem: ${sentence(d.problem)}`
+    ], v);
+    const solutionLine = `${t.idea}: ${sentence(d.product)} ${t.outcome}: ${sentence(d.benefits)}`;
+    const mechanismLine = d.difference ? `${t.mechanism}: ${sentence(d.difference)}` : '';
+    const proofLine = d.proof ? `${t.proof}: ${sentence(d.proof)}` : '';
+    const timingLine = d.whyNow ? `The reason for raising this now: ${sentence(d.whyNow)}` : '';
+    const priceLine = d.price ? `The proposed commitment is ${sentence(d.price)}` : '';
+    const alternativeLine = d.alternative ? `The current approach is ${sentence(d.alternative)}` : '';
+    const discovery = angle === 'curiosity' ? 'How does that compare with what is happening on your side?' : angle === 'reframe' ? 'What would you need to see to consider a different approach?' : 'Is this a priority for you at the moment?';
+    const fit = pick(['The useful question is whether that outcome matches your priorities.', 'We can start by checking whether this addresses the part that matters to you.', 'I’d like to understand what a useful result would need to look like for you.', 'The next step is to assess the fit against what you need.'], v);
+    const blocks = [];
+    const add = (label, text, cue = '') => { if (text) blocks.push({label, text, cue}); };
+    let opener;
+    if (d.relationship === 'warm') opener = `${hello}. ${introName}I’m following up on our conversation about ${fragment(d.product)}.`;
+    else if (d.type === 'phone') opener = `${hello}. ${introName}${t.permission}`;
+    else if (d.type === 'live') opener = `${introName}${pick(['I’ll start with the idea, then we can explore whether it fits.', 'Let me put the core idea on the table, then I’d like your perspective.', 'I’ll keep the introduction focused so there’s room for your questions.', 'I’d like to share the idea and then understand where it fits your priorities.'], v)}`;
+    else opener = `${hello},`;
+    if (d.type === 'email') add('Subject', `${d.relationship === 'warm' ? 'Following up: ' : ''}${fragment(d.product)}`);
+    const spoken = d.type === 'phone' || d.type === 'live';
+    const audienceLine = angle === 'direct' ? '' : `This is designed for ${fragment(d.customer)}.`;
+    if (spoken) {
+      add('Open the conversation', opener, d.type === 'phone' ? 'Pause. If it is not a good time, ask when would suit them and stop the pitch.' : 'Keep your opening calm and unhurried.');
+      add(angle === 'direct' ? 'Set the scene' : 'Create interest', `${openingHook} ${audienceLine} ${problemLine}`.replace(/\s+/g,' '), d.length === 'brief' ? 'Pause briefly; give them room to respond.' : '');
+      if (d.length === 'detailed') add('Find out what matters', discovery, 'Listen before continuing. Use their answer to guide the conversation.');
+      add('Introduce the idea', [solutionLine, mechanismLine].filter(Boolean).join('\n\n'));
+      add('Make it concrete', [d.length === 'detailed' ? alternativeLine : '', proofLine, timingLine, priceLine].filter(Boolean).join('\n\n'));
+      add('Agree on a next step', [d.length === 'detailed' ? fit : '', callToAction].filter(Boolean).join(' '), 'Stop here and listen. Let their answer guide the next step.');
     } else {
-
-      script = generateDMScript(
-        product,
-        customer,
-        price,
-        problem,
-        benefits,
-        tone
-      );
-
+      const body = [opener, d.relationship === 'cold' && d.sender ? introName.trim() : '', openingHook, audienceLine, problemLine, solutionLine, mechanismLine, d.length === 'detailed' ? alternativeLine : '', proofLine, timingLine, priceLine, d.length === 'detailed' ? fit : '', callToAction];
+      if (d.type === 'email' && d.sender) body.push(`${t.end},\n${d.sender}`);
+      add(d.type === 'dm' ? 'First message' : 'Email body', body.filter(Boolean).join('\n\n'));
     }
-
-    output.textContent = script;
-
-    updateStats(script);
-
+    const followup = [
+      { label: 'If they want to know more', text: `${t.agree} ${solutionLine}${mechanismLine ? `\n\n${mechanismLine}` : ''}${proofLine ? `\n\n${proofLine}` : ''}${priceLine ? `\n\n${priceLine}` : ''}\n\n${d.goal === 'call' ? 'What day would suit you for the 10-minute conversation?' : d.goal === 'demo' ? 'What would you most want to see in a demonstration?' : d.goal === 'pilot' ? 'Which outcome should a pilot test, and what scope would be manageable?' : d.goal === 'custom' ? `To make the next step useful: ${callToAction}` : 'Which part would be most useful to explore for your situation?'}`, cue: 'Use after a positive response. Confirm any scope or delivery details before promising them.' },
+      { label: 'One thoughtful follow-up', text: `${hello}, a brief follow-up on ${fragment(d.product)}. ${pick(['The outcome I had in mind', 'The result I’d like to explore', 'The reason I raised it', 'The goal behind the idea'], v)}: ${sentence(d.benefits)}${proofLine ? `\n\n${proofLine}` : mechanismLine ? `\n\n${mechanismLine}` : ''}\n\n${callToAction}`, cue: 'Use only if a follow-up is appropriate for this relationship and channel. Stop if they decline.' },
+      { label: 'Close the loop gracefully', text: `${hello}, I’ll leave the idea here for now. If ${fragment(d.product)} becomes relevant later, you’re welcome to pick up the conversation. Thanks for your time.`, cue: 'If you choose to close the loop, send this once; no repeated chasing.' }
+    ];
+    const objections = [
+      { label: '“It costs too much.”', text: `${t.agree}${d.price ? ` The proposed commitment is ${sentence(d.price)}` : ' We should agree the scope and price before weighing the value.'} Is the concern the available budget, or whether the outcome would justify the cost?\n\nThe intended result is: ${sentence(d.benefits)} We can compare that with the total cost and effort before deciding.`, cue: 'Answer the price question directly. Do not assume returns, savings or that it will pay for itself.' },
+      { label: '“We already have a solution.”', text: `${t.agree} What is working well with your current approach${d.alternative ? `—${fragment(d.alternative)}` : ''}, and what would you still want to improve?${d.difference ? `\n\nThe approach I’m proposing: ${sentence(d.difference)}` : ''}\n\nIf your current solution already meets the need, there may be no reason to change.` },
+      { label: '“I need to think about it.”', text: `${t.agree} What would help you make a decision: clearer scope, stronger evidence, or a better sense of the timing?${d.proof ? `\n\nOne relevant detail: ${sentence(d.proof)}` : '\n\nWhat would you need to see before feeling comfortable with the idea?'}\n\nYou can decide once that question is answered.` },
+      { label: '“Not right now.”', text: `${t.agree}${d.whyNow ? ` The timing I had in mind was: ${sentence(d.whyNow)} Does that matter for your situation?` : ' Is this simply outside your priorities at the moment?'} If the timing does not work, we can leave it here.`, cue: 'Use only the timing they recognize as relevant. Do not invent a deadline.' },
+      { label: '“How do I know it will work?”', text: d.proof ? `${t.agree} Here is the evidence I can share: ${sentence(d.proof)}\n\nThat does not guarantee the same result in every situation. What would you need to check to assess whether it applies to yours?` : `${t.agree} I haven’t provided a verified result here, so I wouldn’t ask you to rely on a promise. What evidence would you need to assess it? We could discuss a demonstration or a clearly scoped test before any larger commitment.` }
+    ];
+    const coach = [
+      { label: `Why this angle: ${angleNames[angle]}`, text: angle === 'direct' ? 'The pitch puts a recognizable problem beside one useful outcome. Use this when the audience values a clear overview.' : angle === 'curiosity' ? 'The opening invites them to consider a specific question before hearing the solution. Listen to the answer; do not use curiosity as a delay tactic.' : 'The opening changes the question being considered. Use it to explore an alternative approach, then ground the idea in your actual offer.' },
+      { label: 'A different way to show the idea', text: `${c ? c.test : 'Choose one realistic situation and walk through how your idea would change it. Ask the other person what would count as a useful result before discussing a test.'} This is a suggested exercise, not a result to claim.` },
+      { label: 'A discovery question to try', text: `${discovery} Then ask what they have already tried and what would make a change worthwhile.` }
+    ];
+    if (!d.difference) coach.push({label: 'Add the reason to choose your approach', text: 'What exactly do you do differently? Name a process, design choice or constraint you remove. This gives the pitch a concrete distinction.', field: 'difference'});
+    if (!d.proof) coach.push({label: 'Evidence is still missing', text: 'Add one verified result, relevant example or experience if you have it. Without one, explore a demonstration or a measurable test; do not imply a track record.', field: 'proof'});
+    if (!d.whyNow) coach.push({label: 'Timing has been left open', text: 'No urgency was added. If there is a relevant event or deadline, include it. Otherwise, let the audience decide whether this is a priority.', field: 'whyNow'});
+    if (!d.price) coach.push({label: 'Be ready to explain the commitment', text: 'No price or commitment was supplied. Know what the next step involves, and discuss scope and price directly when asked.', field: 'price'});
+    const draftWords = words(blocks.filter(b => b.label !== 'Subject').map(b => b.text).join(' '));
+    if (d.type === 'dm' && draftWords > 140) coach.push({label:'This DM is on the long side', text:'Your details make this a longer opening message. Consider shortening your answers, or use Email for the full version. Preserve the evidence and core offer when editing.'});
+    if (/(\b(guarantee[ds]?|always|never|risk.free|best in|no risk)\b|100\s*%)/i.test([d.benefits,d.difference,d.proof].join(' '))) coach.push({label:'Check the certainty of your claims', text:'Your brief contains strong or absolute language. Confirm it is accurate and supportable before using it; the builder does not verify your inputs.'});
+    coach.push({label:'Delivery and source', text:`${spoken ? 'Use the pause cues. Ask one question at a time and allow space for the answer.' : 'Personalize the greeting and use the follow-up only when appropriate.'} The approach adapts ideas from Pitch Anything, Chapters 2, 4 and 6. It does not predict whether a pitch will succeed.`});
+    return {d, angle, version:v, blocks, followup, objections, coach, formatName:formatNames[d.type], toneName:toneNames[d.tone], angleName:angleNames[angle]};
   }
+  function textFor(pack, view = 'pitch') {
+    if (view === 'pitch') return pack.blocks.map(b => `${b.label === 'Subject' ? 'Subject: ' : ''}${b.text}${b.cue ? `\n[${b.cue}]` : ''}`).join('\n\n');
+    const items = view === 'followup' ? pack.followup : view === 'objections' ? pack.objections : pack.coach;
+    return items.map(b => `${b.label}\n${b.text}${b.cue ? `\n[${b.cue}]` : ''}`).join('\n\n');
+  }
+  return {create, textFor, clean, words, formatNames, angleNames, toneNames};
+})();
 
-
-  function generatePhoneScript(
-    product,
-    customer,
-    price,
-    problem,
-    benefits,
-    tone
-  ) {
-
-    let opening = "";
-
-    if (tone === "friendly") {
-
-      opening =
-`Hi! Is this [CUSTOMER]?
-
-Awesome. My name is [YOUR NAME]. I’ll keep this really quick — I work with ${customer}, and I noticed that a lot of them struggle with ${problem || "getting consistent results"}.
-
-That’s actually why I’m calling.`;
-
+const App = (() => {
+  const $ = id => document.getElementById(id);
+  const form = $('pitchForm');
+  const fieldIds = ['product','customer','problem','benefits','tone','length','goal','customGoal','difference','proof','alternative','whyNow','price','sender','recipient','relationship'];
+  const requiredIds = ['product','customer','problem','benefits'];
+  const extraIds = ['difference','proof','alternative','whyNow','price','sender','recipient'];
+  const STORAGE_KEY = 'scriptly.brief.v2';
+  const emptyTemplate = $('emptyState').cloneNode(true);
+  let state = {type:'phone', angle:'direct', version:0, view:'pitch', pack:null, dirty:false, example:false};
+  let toastTimer;
+  const selectedData = () => ({...Object.fromEntries(fieldIds.map(id => [id, $(id).value])), type:state.type});
+  const notice = message => { clearTimeout(toastTimer); $('toast').textContent = message; $('toast').classList.add('show'); toastTimer = setTimeout(() => $('toast').classList.remove('show'), 3600); };
+  function setButtons() {
+    document.querySelectorAll('[data-type]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.type === state.type)));
+    document.querySelectorAll('[data-angle]').forEach(b => { b.setAttribute('aria-pressed', String(b.dataset.angle === state.angle)); b.disabled = !state.pack || state.dirty; });
+    document.querySelectorAll('[data-view]').forEach(b => { const active = b.dataset.view === state.view; b.setAttribute('aria-selected', String(active)); b.tabIndex = active ? 0 : -1; b.disabled = !state.pack; });
+    ['copyBtn','downloadBtn','regenerateBtn'].forEach(id => $(id).disabled = !state.pack || state.dirty);
+  }
+  function updateBrief() {
+    const count = requiredIds.filter(id => PitchEngine.clean($(id).value)).length;
+    $('coverage').textContent = `${count} of 4 answered`;
+    const extra = extraIds.filter(id => PitchEngine.clean($(id).value)).length;
+    $('detailCount').textContent = extra ? `${extra} extra detail${extra === 1 ? '' : 's'} added` : 'Add your difference, evidence or timing.';
+    $('customGoalField').hidden = $('goal').value !== 'custom';
+    $('customGoal').required = $('goal').value === 'custom';
+  }
+  function persist() {
+    if (!$('remember').checked) return;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({schema:2, data:selectedData(), example:state.example})); $('saveStatus').textContent = 'Brief saved on this device.'; }
+    catch { $('saveStatus').textContent = 'Saving unavailable; your brief still works here.'; }
+  }
+  function changed() {
+    requiredIds.concat('customGoal').forEach(id => $(id).removeAttribute('aria-invalid'));
+    $('formError').hidden = true;
+    updateBrief();
+    if (state.pack) { state.dirty = true; $('staleNote').hidden = false; $('generateLabel').textContent = 'Update my pitch'; }
+    setButtons(); persist();
+  }
+  function validate() {
+    const invalid = requiredIds.filter(id => !PitchEngine.clean($(id).value));
+    if ($('goal').value === 'custom' && !PitchEngine.clean($('customGoal').value)) invalid.push('customGoal');
+    if (invalid.length) {
+      invalid.forEach(id => $(id).setAttribute('aria-invalid','true'));
+      $('formError').textContent = invalid.includes('customGoal') && invalid.length === 1 ? 'Write the question you want to end with.' : 'Please answer all four essential questions so your pitch can be specific.';
+      $('formError').hidden = false; $(invalid[0]).focus(); return false;
     }
-
-    else if (tone === "casual") {
-
-      opening =
-`Hey! Quick question — do you currently have a way of dealing with ${problem || "this problem"}?
-
-The reason I’m asking is because I help ${customer} with exactly that using ${product}.`;
-
+    $('formError').hidden = true; return true;
+  }
+  // All user-entered text is rendered with textContent. Never insert it as HTML.
+  function element(tag, className, text) { const el = document.createElement(tag); if (className) el.className = className; if (text) el.textContent = text; return el; }
+  function render() {
+    const out = $('output'); out.replaceChildren();
+    out.setAttribute('aria-labelledby',`tab-${state.view}`);
+    if (!state.pack) {
+      out.append(emptyTemplate.cloneNode(true)); $('wordCount').textContent = '0 words'; $('charCount').textContent = '0 characters'; $('readTime').textContent = 'Your reading time will appear here'; setButtons(); return;
     }
-
-    else {
-
-      opening =
-`Hi, is this [CUSTOMER]?
-
-My name is [YOUR NAME], and I’m reaching out because I work with ${customer} who are dealing with ${problem || "a similar challenge"}.
-
-I wanted to quickly show you how ${product} can help solve that.`;
-
+    const p = state.pack;
+    if (state.view === 'pitch') {
+      p.blocks.forEach(block => { const section = element('section','script-section'); section.append(element('h3','script-label',block.label), element('p','script-text',block.text)); if (block.cue) section.append(element('p','delivery-cue',block.cue)); out.append(section); });
+    } else {
+      const intro = {followup:'Keep the conversation useful. These are separate messages for different moments, not one sequence to send all at once.', objections:'Respond to the concern, then ask a useful question. These replies are conversation starters, not promises.', coach:'Use these suggestions to make the idea clearer and the conversation more specific.'};
+      out.append(element('p','view-intro',intro[state.view]));
+      const items = state.view === 'followup' ? p.followup : state.view === 'objections' ? p.objections : p.coach;
+      items.forEach(item => { const box = element('section', state.view === 'coach' ? 'coach-card' : 'reply-card'); box.append(element('h3','',item.label),element('p','',item.text)); if (item.cue) box.append(element('p','delivery-cue',item.cue)); if (item.field) { const btn=element('button','text-btn','Add this detail'); btn.type='button'; btn.dataset.focusField=item.field; box.append(btn); } out.append(box); });
     }
-
-    return `${opening}
-
-[PAUSE — LET THEM RESPOND]
-
-YOU:
-That makes sense.
-
-The reason I reached out is that ${product} is designed to help ${customer} ${benefits || "get better results while saving time and effort"}.
-
-Instead of ${problem || "dealing with the same problem repeatedly"}, you can use our solution to make the process simpler and more effective.
-
-[EXPLAIN THE MAIN BENEFIT]
-
-YOU:
-The biggest thing our customers like is that they don't have to ${problem || "waste time trying to figure everything out themselves"}.
-
-We handle the difficult part and give you a much simpler way to get the result you're looking for.
-
-${price ? `The investment is ${price}.` : "I can give you the exact pricing based on what you need."}
-
-[PAUSE]
-
-YOU:
-Would you be open to giving it a try?
-
-IF THEY SAY YES:
-
-YOU:
-Perfect. Let's get you set up.
-
-IF THEY SAY "I NEED TO THINK ABOUT IT":
-
-YOU:
-Of course. Just so I can understand — is it the price, the timing, or are you not sure whether it will work for you?
-
-IF THEY SAY "IT'S TOO EXPENSIVE":
-
-YOU:
-I completely understand.
-
-The bigger question is whether solving ${problem || "this problem"} is worth more to you than the investment.
-
-If it is, then this can actually pay for itself through the time/results it creates.
-
-CLOSE:
-
-YOU:
-Would you like to get started today?`;
+    const plain = PitchEngine.textFor(p, state.view);
+    const spokenText = p.blocks.filter(b => b.label !== 'Subject').map(b=>b.text).join(' ');
+    const count = state.view === 'pitch' ? PitchEngine.words(spokenText) : PitchEngine.words(plain);
+    $('wordCount').textContent = `${count} words${state.view === 'pitch' && ['phone','live'].includes(p.d.type) ? ' to speak' : ''}`;
+    $('charCount').textContent = `${plain.length.toLocaleString()} characters`;
+    $('readTime').textContent = state.view === 'pitch' ? `~${Math.max(1,Math.ceil(count / 140 * 60))} sec aloud${['phone','live'].includes(p.d.type) ? ' + pauses' : ''}` : 'Copy this tab · Download all materials';
+    $('outputStatus').textContent = `${p.formatName} · ${p.toneName} · Wording ${p.version + 1} of 4`;
+    $('statusDot').classList.add('ready');
+    $('reviewNote').textContent = state.view === 'pitch' ? 'Make it yours before sending. Pause cues are included when you copy.' : 'Copy saves this tab. Download includes all four tabs.';
+    $('sampleNote').hidden = !state.example;
+    setButtons();
   }
-
-
-  function generateDMScript(
-    product,
-    customer,
-    price,
-    problem,
-    benefits,
-    tone
-  ) {
-
-    return `Hey! 👋
-
-I came across your business and noticed you're in the ${customer} space.
-
-Quick question:
-
-Are you currently dealing with ${problem || "the problem of getting consistent results"}?
-
-I ask because I help ${customer} using ${product}.
-
-The main benefit is simple:
-
-${benefits || "It helps you save time, improve your results and make the process much easier."}
-
-I thought it could be a good fit for you.
-
-${price ? `The package starts at ${price}.` : "I can send you the pricing and options."}
-
-Would you like me to send you a quick breakdown of how it works?
-
----
-
-IF THEY SAY YES:
-
-Awesome 🙌
-
-Here's the simple version:
-
-1. We understand what you're currently doing.
-2. We identify where you're losing opportunities.
-3. We use ${product} to solve the problem.
-4. You get a much simpler path toward your goal.
-
-The whole point is to make ${problem || "the process"} easier without adding more work to your plate.
-
-Want me to send you the details?
-
----
-
-IF THEY SAY "HOW MUCH?":
-
-Sure!
-
-${price || "[INSERT PRICE]"}
-
-That includes the core service and everything you need to get started.
-
-If you'd like, I can also show you exactly what you'd be getting before you make a decision.
-
----
-
-IF THEY DON'T RESPOND:
-
-Hey! Just wanted to follow up on this.
-
-No pressure at all — I just didn't want you to miss the opportunity if ${product} could genuinely help your business.
-
-Want me to send over the details?`;
+  function generate({newWording = false, scroll = false} = {}) {
+    if (!validate()) return;
+    const data = selectedData();
+    const sameBrief = state.pack && JSON.stringify(data) === JSON.stringify(state.inputSnapshot);
+    state.version = sameBrief && (newWording || !state.dirty) ? (state.version + 1) % 4 : 0;
+    try { state.pack = PitchEngine.create(data,state.angle,state.version); }
+    catch(error) { notice(error.message); return; }
+    state.inputSnapshot = data; state.dirty = false; state.view = 'pitch'; $('staleNote').hidden = true; $('generateLabel').textContent = 'Generate my pitch';
+    render(); persist();
+    $('announcement').textContent = `${state.pack.formatName} ready. ${state.pack.angleName}. Wording ${state.version + 1} of 4.`;
+    if (scroll && window.matchMedia('(max-width: 850px)').matches) { $('results').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'}); $('results').focus({preventScroll:true}); }
   }
-
-
-  function updateStats(text) {
-
-    const words =
-      text.trim()
-        ? text.trim().split(/\s+/).length
-        : 0;
-
-    document.getElementById("wordCount")
-      .textContent = `${words} words`;
-
-    document.getElementById("charCount")
-      .textContent = `${text.length} characters`;
-
-  }
-
-
-  function copyScript() {
-
-    const output =
-      document.getElementById("output");
-
-    const text = output.innerText;
-
-    if (!text || text.includes("Your script will appear here")) {
-
-      showToast("Generate a script first.");
-
-      return;
+  async function copy() {
+    if (!state.pack || state.dirty) return;
+    const text = PitchEngine.textFor(state.pack,state.view);
+    try { if (!navigator.clipboard || !window.isSecureContext) throw new Error('Use fallback'); await navigator.clipboard.writeText(text); notice('Copied to clipboard.'); }
+    catch {
+      const previous = document.activeElement, box=document.createElement('textarea'); box.value=text; box.style.cssText='position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;'; box.setAttribute('readonly',''); document.body.append(box); box.select();
+      try { if (!document.execCommand('copy')) throw new Error('Copy not available'); notice('Copied to clipboard.'); } catch { notice('Copy is unavailable. Select the text to copy it, or use Download.'); }
+      finally { box.remove(); if (previous) previous.focus({preventScroll:true}); }
     }
-
-    navigator.clipboard.writeText(text);
-
-    showToast("Copied to clipboard ✓");
-
   }
-
-
-  function showToast(message) {
-
-    const toast =
-      document.getElementById("toast");
-
-    toast.textContent = message;
-
-    toast.classList.add("show");
-
-    setTimeout(() => {
-
-      toast.classList.remove("show");
-
-    }, 2200);
-
+  function download() {
+    if (!state.pack || state.dirty) return;
+    const p=state.pack;
+    const text = `SCRIPTLY PITCH KIT\n${p.formatName} | ${p.toneName} | ${p.angleName}\n\n${['pitch','followup','objections','coach'].map((view,i)=>`${['PITCH','FOLLOW-UP OPTIONS','OBJECTION RESPONSES','COACHING NOTES'][i]}\n${'='.repeat(30)}\n${PitchEngine.textFor(p,view)}`).join('\n\n')}\n\nReview all claims before use. Inspired by Pitch Anything by Oren Klaff, Chapters 2, 4 and 6. Original adaptations; not affiliated or endorsed.\n`;
+    try { const blob=new Blob(['\ufeff',text],{type:'text/plain;charset=utf-8'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=`scriptly-${p.d.type}-${p.angle}.txt`; document.body.append(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),10000); notice('Your pitch kit download has started.'); }
+    catch { notice('Download is unavailable in this browser. Use Copy instead.'); }
   }
-
-
-  function loadExample() {
-
-    document.getElementById("product").value =
-      "Social Media Management";
-
-    document.getElementById("customer").value =
-      "local restaurants";
-
-    document.getElementById("price").value =
-      "R2,500/month";
-
-    document.getElementById("problem").value =
-      "struggling to consistently post content and attract customers through social media";
-
-    document.getElementById("benefits").value =
-      "we create and manage their social media content so they can focus on running their restaurant";
-
-    document.getElementById("tone").value =
-      "confident";
-
-    generateScript();
-
-    window.scrollTo({
-      top: document.querySelector(".app").offsetTop - 30,
-      behavior: "smooth"
-    });
-
+  function fill(data) { fieldIds.forEach(id => { if (typeof data[id] === 'string') { const el=$(id); if (el.tagName === 'SELECT') { if (Array.from(el.options).some(o=>o.value===data[id])) el.value=data[id]; } else el.value=data[id].slice(0,el.maxLength > 0 ? el.maxLength : 1000); } }); if (Object.hasOwn(PitchEngine.formatNames,data.type)) state.type=data.type; updateBrief(); setButtons(); }
+  function example() {
+    const data={product:'A one-page website with a WhatsApp booking button',customer:'independent beauty salon owners',problem:'Potential clients miss prices and booking details when everything is scattered across Instagram posts.',benefits:'Clients can see services, compare prices and request a booking in one place.',difference:'The booking button opens the salon’s existing WhatsApp, so the owner can keep the tools they already use.',proof:'',alternative:'Answering the same questions in individual DMs',whyNow:'',price:'R1,500 once-off',sender:'',recipient:'',tone:'friendly',length:'brief',goal:'breakdown',customGoal:'',relationship:'cold',type:'dm'};
+    fill(data); state.example=true; state.version=0; state.angle='curiosity'; state.pack=null; state.dirty=false; generate({scroll:true}); if (!window.matchMedia('(max-width: 850px)').matches) $('builder').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'}); notice('Example loaded. Replace the illustrative details with your own.');
   }
+  function clear() {
+    form.reset();
+    try { localStorage.removeItem(STORAGE_KEY); } catch { /* Browser storage is optional. */ }
+    state={type:'phone',angle:'direct',version:0,view:'pitch',pack:null,dirty:false,example:false};
+    $('extraDetails').open=false; $('formError').hidden=true; $('staleNote').hidden=true; $('sampleNote').hidden=true; $('statusDot').classList.remove('ready'); $('outputStatus').textContent='Ready when you are'; $('generateLabel').textContent='Generate my pitch'; $('saveStatus').textContent='Your pitch is built in your browser.'; $('reviewNote').textContent='A clear conversation starts with a specific idea.';
+    requiredIds.concat('customGoal').forEach(id=>$(id).removeAttribute('aria-invalid')); updateBrief(); render(); $('product').focus(); notice('Brief cleared, including any saved copy on this device.');
+  }
+  form.addEventListener('submit',e=>{e.preventDefault();generate({scroll:true});});
+  form.addEventListener('input',e=>{if(e.target.id!=='remember')changed();});
+  form.addEventListener('change',e=>{if(e.target.id!=='remember')changed();});
+  form.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();generate({scroll:true});}});
+  document.addEventListener('click',e=>{
+    const exampleBtn=e.target.closest('[data-example]'); if(exampleBtn){example();return;}
+    const format=e.target.closest('[data-type]'); if(format){state.type=format.dataset.type;changed();return;}
+    const angle=e.target.closest('[data-angle]'); if(angle && !angle.disabled){state.angle=angle.dataset.angle;state.pack=PitchEngine.create(state.inputSnapshot,state.angle,state.version);state.view='pitch';render();$('announcement').textContent=`${state.pack.angleName} pitch ready.`;return;}
+    const tab=e.target.closest('[data-view]'); if(tab && !tab.disabled){state.view=tab.dataset.view;render();return;}
+    const focus=e.target.closest('[data-focus-field]'); if(focus){$('extraDetails').open=true;$(focus.dataset.focusField).focus();}
+  });
+  document.querySelector('.tabs').addEventListener('keydown',e=>{
+    if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key)||!state.pack)return;
+    e.preventDefault();const tabs=Array.from(document.querySelectorAll('[data-view]'));const n=tabs.findIndex(b=>b.dataset.view===state.view);const index=e.key==='Home'?0:e.key==='End'?tabs.length-1:(n+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
+    state.view=tabs[index].dataset.view;render();tabs[index].focus();
+  });
+  $('copyBtn').addEventListener('click',copy);$('downloadBtn').addEventListener('click',download);$('regenerateBtn').addEventListener('click',()=>generate({newWording:true}));$('resetBtn').addEventListener('click',clear);
+  $('remember').addEventListener('change',()=>{
+    if($('remember').checked){persist();}
+    else {try{localStorage.removeItem(STORAGE_KEY);$('saveStatus').textContent='Your pitch is built in your browser.';}catch{$('saveStatus').textContent='Could not remove saved data. Clear it in your browser settings.';}}
+  });
+  $('methodLink').addEventListener('click',()=>{$('methodDetails').open=true;});
+  $('year').textContent=new Date().getFullYear();
+  try { const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null'); if(saved&&saved.schema===2&&saved.data&&typeof saved.data==='object'){fill(saved.data);state.example=saved.example===true;$('remember').checked=true;$('saveStatus').textContent='Saved brief restored on this device.';} } catch { /* A disabled or corrupt store must not prevent generation. */ }
+  updateBrief(); setButtons();
+  return {generate};
+})();
 
+// Retain the owner's existing Google Analytics property on hosted pages only.
+// No pitch text, names, prices, or other form values are passed as event data here.
+if (location.protocol === 'https:' && !['localhost','127.0.0.1'].includes(location.hostname)) {
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){window.dataLayer.push(arguments);}
+  gtag('js',new Date());gtag('config','G-LTR7RPV8FT');
+  const analytics=document.createElement('script');analytics.async=true;analytics.src='https://www.googletagmanager.com/gtag/js?id=G-LTR7RPV8FT';document.head.append(analytics);
+}
 </script>
-
 </body>
 </html>
